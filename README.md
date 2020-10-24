@@ -28,10 +28,10 @@ project, we define a CronJob that executes a job periodically. The
 `.spec.schedule` specifies the frequency and when to execute the job, in
 crontab(5) format. In this project, we specify the schedule as `"*/1 * * * *"`,
 which means the job is executed every 1 minute. The job itself is defined by
-`.spec.jobTemplate`, and in ths project we use the Docker image
-(`0xd8c4eb/simple-counter:1.0.0`) that has been built using the Dockerfile and
-published to the Docker Registry on Docker Hub. The `restartPolicy` field is set
-to `OnFailure` such that the container is restarted when it failed to exit
+`.spec.jobTemplate`, and in ths project the default Docker image being used
+(`0xd8c4eb/simple-counter:1.0.0`) was built using the Dockerfile and published
+to the Docker Registry on Docker Hub. The `restartPolicy` field is set to
+`OnFailure` such that the container is restarted when it failed to exit
 successfully (e.g. the container runs out of memory, or the list counting in the
 Java program failed for some reasons).
 
@@ -87,7 +87,8 @@ Before the Docker image can be published, tag the Docker image:
 docker image tag simple-counter:latest your-repo-name/simple-counter:1.0.0
 ```
 
-Replace `your-repo-name` with your own repository on Docker Hub.
+Replace `your-repo-name` with your own repository on Docker Hub. From now on, we
+refer to your Docker image as `your-repo-name/simple-counter:1.0.0`.
 
 You can verify that the Docker image has been tagged by:
 
@@ -115,6 +116,10 @@ On Google Cloud Platform, in your project, navigate to Kubernetes Engine and
 activate a Cloud Shell. Click on the Connect button, run the `gcloud` command
 in the Cloud Shell to configure `kubectl`. You should be able to find the
 configuration in `~/.kube/config` in the Cloud Shell.
+
+In `k8s-cronjob.yaml`, change the `image` field to point to the Docker image
+you published, i.e. `your-repo-name/simple-counter:1.0.0`, so that your own
+Docker image will be used.
 
 Now upload the `k8s-cronjob.yaml` file to the Cloud Shell and run:
 
