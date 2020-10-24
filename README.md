@@ -12,9 +12,9 @@ This project consists of the following components:
 * A Kubernetes manifest.
 
 The Java program (`Event.java` and `Main.java`) gets a list of events with
-timestamps and count the items in the list. In real-world the list may be
-obtained from a database, an API, or any data source. For demonstration purpose,
-the data in the Java program is generated randomly.
+timestamps and count the items in the list. In real-world application the list
+may be obtained from a database, an API, or any data source. For demonstration
+purpose, the data in the Java program is generated randomly.
 
 The Dockerfile (`Dockerfile`) specifies what are being included in the Docker
 image being built. In this project, the Docker image being built is based on the
@@ -28,7 +28,7 @@ project, we define a CronJob that executes a job periodically. The
 `.spec.schedule` specifies the frequency and when to execute the job, in
 crontab(5) format. In this project, we specify the schedule as `"*/1 * * * *"`,
 which means the job is executed every 1 minute. The job itself is defined by
-`.spec.jobTemplate`, and in ths project the default Docker image being used
+`.spec.jobTemplate`, and in this project the default Docker image being used
 (`0xd8c4eb/simple-counter:1.0.0`) was built using the Dockerfile and published
 to the Docker Registry on Docker Hub. The `restartPolicy` field is set to
 `OnFailure` such that the container is restarted when it failed to exit
@@ -147,6 +147,9 @@ the timestamp.
 
 Check the log again 1 minute later, you will be able to find another set of
 logs created.
+
+In real-world application, the processing results may be stored on a database
+directly, or a report is generated and placed on an object storage like S3.
 
 ## License ##
 
