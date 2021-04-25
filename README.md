@@ -35,6 +35,8 @@ to the Docker Registry on Docker Hub. The `restartPolicy` field is set to
 successfully (e.g. the container runs out of memory, or the list counting in the
 Java program failed for some reasons).
 
+**This project is no longer being maintained.**
+
 ## Requirements ##
 
 * Java SDK (`>=15`).
